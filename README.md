@@ -32,4 +32,4 @@ The great majority of the assignments of my Bachelor's Course, specially program
 ### Remark : 
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
-This is **not** a realistic view of all the contents I have been covering in my Bachelor's Course, there are only some of them that from which the content makes sense to be shared.
+This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them that which the contents makes sense to be shared.
