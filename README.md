@@ -18,14 +18,12 @@ Some of the assignments of my Bachelor's Course, specially programming labs, may
 **2nd Semester** 
 ```    
      |  
-     |_________ C_Labs
+     |_________ Analyse && Conception 
      |  
-     |________ Swift Labs 
+     |________ C_Labs 
      |  
      |________ General Maths 2  
      |  
-     |________ Analyse && Conception  
-     |
      |________ Gestion Projets
 ```
 
