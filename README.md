@@ -7,11 +7,11 @@ Some of the assignments of my Bachelor's Course, specially programming labs, may
 **1st Semester**
 ```      
      |  
-     |_________ Java_Labs
+     |_________ General Maths 1 
      |  
-     |________ OS_Labs_bash
+     |________ Java_Labs
      |  
-     |________ General Maths 1 
+     |________ OS_Labs_bash 
 ```
 
 
