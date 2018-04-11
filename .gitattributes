@@ -2,6 +2,9 @@ linguist-vendored
 *.o linguist-vendored=true
 
 linguist-vendored
+*.make linguist-vendored=true
+
+linguist-vendored
 *.h linguist-vendored=true
 
 linguist-vendored
