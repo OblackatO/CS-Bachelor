@@ -9,3 +9,6 @@ linguist-vendored
 
 linguist-vendored
 *.h linguist-vendored=true
+
+linguist-vendored
+*.sh linguist-vendored=true
