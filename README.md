@@ -7,25 +7,23 @@ Some of the assignments of my Bachelor's Course, specially programming labs, may
 **1st Semester**
 ```      
      |  
-     |_________ Java_Labs
+     |_________ General Maths 1 
      |  
-     |________ OS_Labs_bash
+     |________ Java_Labs
      |  
-     |________ General Maths 1 
+     |________ OS_Labs_bash 
 ```
 
 
 **2nd Semester** 
 ```    
      |  
-     |_________ C_Labs
+     |_________ Analyse && Conception 
      |  
-     |________ Swift Labs 
+     |________ C_Labs 
      |  
      |________ General Maths 2  
      |  
-     |________ Analyse && Conception  
-     |
      |________ Gestion Projets
 ```
 
