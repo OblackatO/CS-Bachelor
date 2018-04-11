@@ -1,0 +1,7 @@
+package lu.uni.helloworld;
+
+import java.util.Scanner;
+
+public class Hows_Weather {
+
+}

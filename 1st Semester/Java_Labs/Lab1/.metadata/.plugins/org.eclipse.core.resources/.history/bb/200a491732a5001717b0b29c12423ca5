@@ -1,0 +1,26 @@
+package lu.uni.helloworld;
+
+import java.util.Scanner;
+
+public class The_Bill_Please {
+
+	public static void main(String[] args) {
+		int quantity,unit_price;
+		double VAT,total_price_sansvat,total_price_avecvat;
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Enter the desired price unit:");
+		unit_price = scanner.nextInt();
+		System.out.println("Enter the quntity of the product:");
+		quantity = scanner.nextInt();
+		System.out.println("Enter the VAT tax :(example: 0.20; 0.10)");
+		VAT = scanner.nextDouble();
+		total_price_sansvat = (unit_price*quantity);
+		total_price_avecvat = (total_price_sansvat * VAT);
+		 
+		System.out.println("Total price without VAT: "+total_price_sansvat+"€");
+		System.out.println("VAT value: "+Math.round(VAT)+"%");
+		System.out.println("Price with VAT: "+total_price_avecvat+"€");
+	}
+
+}

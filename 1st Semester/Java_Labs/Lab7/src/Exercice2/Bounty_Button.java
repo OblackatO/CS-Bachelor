@@ -1,0 +1,23 @@
+package Exercice2;
+
+public class Bounty_Button extends Button {
+	
+	private static int total_quantity=10; //Default quantity of bounties in the machine
+	private double price= 3; //3 euros
+	
+	public Bounty_Button(String name) {
+		super(name);
+		
+		if(Bounty_Button.total_quantity == 0) {
+			System.out.println("Product not available anymore.");;
+		}else {
+			/*
+			 * Adds price to total bill and the name of product to basket
+			 */
+			Button.total_price += price;
+			Button.total_products[Button.current_product] = name;
+			Button.current_product++;
+			Bounty_Button.total_quantity--;
+		}
+	}
+}

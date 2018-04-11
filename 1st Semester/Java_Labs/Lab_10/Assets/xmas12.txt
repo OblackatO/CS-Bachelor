@@ -1,0 +1,12 @@
+First	A Partridge in a Pear Tree.
+Second	Two Turtle Doves, and
+Third	Three French Hens,
+Fourth	Four Calling Birds,
+Fifth	Five Gold Rings,
+Sixth	Six Geese a-Laying,
+Seventh	Seven Swans a-Swimming,
+Eighth	Eight Maids a-Milking,
+Ninth	Nine Ladies Dancing,
+Tenth	Ten Lords a-Leaping,
+Eleventh	Eleven Pipers Piping,
+Twelfth	Twelve Drummers Drumming,

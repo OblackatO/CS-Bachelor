@@ -1,0 +1,15 @@
+package lu.uni.helloworld;
+
+public class Error_analysis {
+
+	public static void main(String[] args) {
+		//1.syntax error, not commas in the variables and not ";" at the end, and two duplicate var 
+		int a, b, c, d = 200; //corrected version
+		//2.last parenthesis not needed : syntax error
+		System.out.println((1+2)-3); //corrected version
+		// 3.not int it's a double
+		double e = 0.1; //corrected version : 
+		// 4.
+		f = f + 1; 
+	}
+}

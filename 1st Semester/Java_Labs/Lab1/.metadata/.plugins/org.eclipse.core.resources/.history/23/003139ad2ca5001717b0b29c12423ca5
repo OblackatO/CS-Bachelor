@@ -1,0 +1,48 @@
+package lu.uni.helloworld;
+
+import java.util.Scanner;
+
+public class Calculte_marks { 
+	
+	public static void main(String[] args) {
+		int note1,note2,final_note;
+		double average; 
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Enter your 1st grade, mid-term exam:");
+		note1 = scanner.nextInt();
+		if (note1 > 20) { 
+			note1 = 20 ;
+			}
+		else if (note1 < 0) {
+			note1 = 0;
+			}
+		
+		System.out.println("Enter your 2nd grade, mid-term exam:");
+		note2 = scanner.nextInt();
+		if (note2 > 20) { 
+			note2 = 20 ;
+			}
+		else if (note2 < 0) {
+			note2 = 0;
+			}
+		
+		System.out.println("Enter your final exam mark:");
+		final_note = scanner.nextInt();
+		if (final_note > 20) { 
+			final_note = 20 ;
+			}
+		else if (final_note < 0) {
+			final_note = 0;
+			}
+		scanner.close(); 
+		average = (0.20*note1) + (0.20*note2) + (0.60*final_note);
+		
+		System.out.println("All the entered notes: "+note1+" "+note2+" "+final_note);
+		System.out.println("Your average is: "+Math.round(average));
+		
+		
+	}
+
+}
