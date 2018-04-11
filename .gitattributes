@@ -5,10 +5,10 @@ linguist-vendored
 *.sh linguist-vendored=true
 
 linguist-vendored
-*.c linguist-vendored=true
+*.o linguist-vendored=true
 
 linguist-vendored
-*.o linguist-vendored=true
+*.c linguist-vendored=true
 
 linguist-vendored
 *.h linguist-vendored=true
