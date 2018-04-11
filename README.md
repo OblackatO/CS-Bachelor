@@ -27,7 +27,7 @@ Some of the assignments of my Bachelor's Course, specially programming labs, may
      |________ Gestion Projets
 ```
 
-### Remark : 
+### Remarks : 
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
 This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them which the contents makes sense to be shared.
