@@ -2,6 +2,9 @@ linguist-vendored
 *.o linguist-vendored=true
 
 linguist-vendored
+*.h linguist-vendored=true
+
+linguist-vendored
 *.java linguist-vendored=true
 
 linguist-vendored
@@ -9,7 +12,4 @@ linguist-vendored
 
 linguist-vendored
 *.c linguist-vendored=true
-
-linguist-vendored
-*.h linguist-vendored=true
 
