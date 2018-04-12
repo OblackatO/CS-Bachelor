@@ -38,7 +38,7 @@ int main(int argc, const char * argv[]) {
     printf("Input a string:\n");
     scanf("%s", string_array1);
     
-    string_array2_pointer = calloc(strlen(string_array1)*2, sizeof(char));
+    string_array2_pointer = calloc(strlen(string_array1)*2+1, sizeof(char)); //Where +1 is for the \0
     strcat(string_array2_pointer, string_array1);
     strcat(string_array2_pointer, string_array1);
     printf("Original:%s\n",string_array1);
