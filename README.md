@@ -1,6 +1,6 @@
 # CS-Bachelor
 
-Some of the assignments of my Bachelor's Course, specially programming labs, may be found here.
+Some of the assignments of my Bachelor's Course, especially programming labs, may be found here.
 
 ## Structure 
 
