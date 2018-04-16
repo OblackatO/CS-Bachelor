@@ -78,7 +78,7 @@ int add_flight(airport *airport, flight *flight) {
     
     /*if size of array of pointers to flight is 0, use malloc, other wise
      *user realloc, because there are already some pointers to flight
-     Please note that very important fact that I'm allocating sizeof(*flight)
+     Please note a very important fact that I'm allocating sizeof(*flight)
      and not sizeof(flight), as it is an array of pointers. If sizeof(flight)
      is used, the program will act in a stranger way.
      */
