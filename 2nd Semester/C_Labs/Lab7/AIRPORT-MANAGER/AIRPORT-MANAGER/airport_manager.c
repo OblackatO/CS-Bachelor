@@ -31,6 +31,7 @@ airport *new_airport(char *name, char *code) {
             exit(0);
         }
         
+        airport_to_return->total_flights = 0;
         return airport_to_return;
     }
 }
@@ -79,24 +80,30 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
 
 int add_flight(airport *airport, flight *flight) {
     
-    int total_flights = sizeof(airport->flights)/sizeof(airport->flights[0]);
-    if(total_flights == 0) {
+    if(airport->total_flights == 0) {
         if((airport->flights = malloc(1*sizeof(flight))) == NULL) {
             perror("no more memory to add flight");
             exit(0);
          }
-        airport->flights[0] = *flight;
+        airport->total_flights = 0;
+        airport->total_flights += 1;
+        airport->flights[0] = flight;
+        return TRUE;
             
     }else {
-        airport->flights = realloc(airport->flights, ++total_flights*sizeof(flight));
+        airport->total_flights += 1;
+        airport->flights = realloc(airport->flights, airport->total_flights*sizeof(flight));
+        //printf("sizeof flights array:%d", sizeof(airport->flights));
+        printf("total flights:%d", airport->total_flights);
         if(airport->flights == NULL) {
             perror("no more memory to add flight");
             exit(0);
         }
-        airport->flights[total_flights] = *flight;
+        airport->flights[airport->total_flights] = flight;
         return TRUE;
     }
-    return FALSE;
+    //printf("size after the flight:%lu",sizeof(airport->flights));
+    //return FALSE;
 }
     
 
@@ -107,16 +114,16 @@ int check_in(char *passenger_name, int flight_number, airport *airport) {
     int total_flights = sizeof(airport->flights)/sizeof(airport->flights[0]);
     
     if(total_flights == 0) {
-        if((airport->flights[0].seats_map = strdup(passenger_name)) == NULL) {
+        if((airport->flights[0]->seats_map = strdup(passenger_name)) == NULL) {
             perror("No more places available || no more memory avaible.");
             exit(0);
          }
     }
     
     for(int i=0; i<total_flights; i++) {
-        printf("current flight%d:", airport->flights[i].flight_number);
-        if(airport->flights[i].flight_number == flight_number) {
-            if((airport->flights[i].seats_map = strdup(passenger_name)) == NULL) {
+        printf("current flight%d:", airport->flights[i]->flight_number);
+        if(airport->flights[i]->flight_number == flight_number) {
+            if((airport->flights[i]->seats_map = strdup(passenger_name)) == NULL) {
                 perror("No more places available || no more memory avaible.");
                 exit(0);
             }else {
@@ -134,7 +141,7 @@ int remove_flight(airport *airport, int flight_number) {
         return FALSE;
     }else {
         for(int i=0; i<total_flights; i++) {
-            if(airport->flights[i].flight_number == flight_number) {
+            if(airport->flights[i]->flight_number == flight_number) {
                 airport->flights = realloc(airport->flights, --total_flights*sizeof(flight));
                 return TRUE;
             }
@@ -144,16 +151,14 @@ int remove_flight(airport *airport, int flight_number) {
 }
 
 void print_schedule(airport *airport) {
-    int total_flights = sizeof(airport->flights)/sizeof(airport->flights[0]);
-    
-    if(total_flights == 0) {
+    if(airport->total_flights == 0) {
         printf("no flights were added.");
     }
     
-    for(int i=0; i<total_flights; i++) {
-        printf("\nAirline: %s\n", airport->flights[i].airline);
-        printf("%s ----> %s\n", airport->flights[i].origin, airport->flights[i].destination);
-        printf("Time %d:%d", airport->flights[i].hour, airport->flights[i].minutes);
+    for(int i=0; i<airport->total_flights; i++) {
+        printf("\nAirline: %s\n", airport->flights[i]->airline);
+        printf("%s ----> %s\n", airport->flights[i]->origin, airport->flights[i]->destination);
+        printf("Time %d:%d", airport->flights[i]->hour, airport->flights[i]->minutes);
     }
 }
 

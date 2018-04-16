@@ -25,7 +25,8 @@ typedef struct airport {
     
     char *name;
     char *code;
-    flight *flights; //already tried with struct flight *flights, still does not work.
+    int total_flights;
+    flight **flights; //already tried with struct flight *flights, still does not work.
     
     
 }airport;
