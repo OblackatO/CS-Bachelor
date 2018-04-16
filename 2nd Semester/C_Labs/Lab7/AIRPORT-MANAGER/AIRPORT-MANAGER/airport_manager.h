@@ -26,7 +26,9 @@ typedef struct airport {
     char *name;
     char *code;
     int total_flights;
-    flight **flights; //already tried with struct flight *flights, still does not work.
+    /*flights : Tried to use **flight to dynamically allocate memory, but after several hours of trying, and bothering my professor it still did not work, so fuck it.
+     */
+    flight **flights;
     
     
 }airport;
