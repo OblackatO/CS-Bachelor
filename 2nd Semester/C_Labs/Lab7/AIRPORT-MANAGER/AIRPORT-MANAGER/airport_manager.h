@@ -15,7 +15,8 @@ typedef struct flight {
     char *origin, *destination;
     int hour, minutes;
     int gate;
-    char *seats_map;
+    int total_passengers;
+    char **seats_map;
     
     
 }flight;
@@ -26,8 +27,6 @@ typedef struct airport {
     char *name;
     char *code;
     int total_flights;
-    /*flights : Tried to use **flight to dynamically allocate memory, but after several hours of trying, and bothering my professor it still did not work, so fuck it.
-     */
     flight **flights;
     
     

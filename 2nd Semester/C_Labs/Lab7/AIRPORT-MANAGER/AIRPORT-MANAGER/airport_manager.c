@@ -68,30 +68,26 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
             exit(0);
         }
         
-        for(int i=0; i<sm_size; i++) {
-            flight_to_return->seats_map[i] = 1;
-        }
-        
         return flight_to_return;
     
     }
 }
 
-
+//already works
 int add_flight(airport *airport, flight *flight) {
     
+    /*if size of array of pointers to flight is 0, use malloc, other wise
+     *user realloc, because there are already some pointers to flight
+     Please note that very important fact that I'm allocating sizeof(*flight)
+     and not sizeof(flight), as it is an array of pointers. If sizeof(flight)
+     is used, the program will act in a stranger way.
+     */
     if(airport->total_flights == 0) {
         if((airport->flights = malloc(sizeof(*flight)*1)) == NULL) {
             perror("no more memory to add flight");
             exit(0);
          }
         
-        /*
-        if((airport->flights[0] = malloc(sizeof(flight))) == NULL) {
-            perror("no more memory to create flight");
-            exit(0);
-        }
-         */
         airport->flights[airport->total_flights++] = flight;
         return TRUE;
             
@@ -103,59 +99,33 @@ int add_flight(airport *airport, flight *flight) {
             exit(0);
         }
         
-        /*
-        if((airport->flights[airport->total_flights] = malloc(sizeof(flight))) == NULL) {
-            perror("no more memory to create flight");
-            exit(0);
-        }
-         */
-        
         airport->flights[airport->total_flights++] = flight;
         return TRUE;
     }
-    //printf("size after the flight:%lu",sizeof(airport->flights));
-    //return FALSE;
 }
     
 
 
-//does not work.
+//to do. 
+
 int check_in(char *passenger_name, int flight_number, airport *airport) {
     
-    int total_flights = sizeof(airport->flights)/sizeof(airport->flights[0]);
+    return TRUE;
     
-    if(total_flights == 0) {
-        if((airport->flights[0]->seats_map = strdup(passenger_name)) == NULL) {
-            perror("No more places available || no more memory avaible.");
-            exit(0);
-         }
-    }
     
-    for(int i=0; i<total_flights; i++) {
-        printf("current flight%d:", airport->flights[i]->flight_number);
-        if(airport->flights[i]->flight_number == flight_number) {
-            if((airport->flights[i]->seats_map = strdup(passenger_name)) == NULL) {
-                perror("No more places available || no more memory avaible.");
-                exit(0);
-            }else {
-                return TRUE;
-            }
-        }
-    }
-    return FALSE;
 }
 
+
+//does not work correctly. : I know a solution will do it when I have time.
 int remove_flight(airport *airport, int flight_number) {
-    int total_flights = sizeof(airport->flights)/sizeof(airport->flights[0]);
-    if(total_flights == 0) {
-        perror("No flights were added");
-        return FALSE;
-    }else {
-        for(int i=0; i<total_flights; i++) {
-            if(airport->flights[i]->flight_number == flight_number) {
-                airport->flights = realloc(airport->flights, --total_flights*sizeof(flight));
-                return TRUE;
-            }
+    
+    int total_flights = airport->total_flights;
+    for(int i=0; i<total_flights; i++) {
+        if(airport->flights[i]->flight_number == flight_number) {
+            printf("Flight about to be deleted...");
+            free(airport->flights[i]) ; airport->flights[i] = NULL;
+            airport->flights = realloc(airport->flights, --airport->total_flights*sizeof(airport->flights[0]));
+            return TRUE;
         }
     }
     return FALSE;
@@ -166,11 +136,12 @@ void print_schedule(airport *airport) {
         printf("no flights were added.");
     }
     
-    printf("Total flights scheduled:%d", airport->total_flights);
+    printf("Total flights scheduled:%d\n", airport->total_flights);
     for(int i=0; i<airport->total_flights; i++) {
-        printf("\nAirline: %s\n", airport->flights[i]
+        printf("\nAirline: %s", airport->flights[i]
                ->airline);
-        printf("%s ----> %s\n", airport->flights[i]->origin, airport->flights[i]->destination);
+        printf("Origin:%s", airport->flights[i]->origin);
+        printf("Destination:%s", airport->flights[i]->destination);
         printf("Time %d:%d", airport->flights[i]->hour, airport->flights[i]->minutes);
     }
 }
