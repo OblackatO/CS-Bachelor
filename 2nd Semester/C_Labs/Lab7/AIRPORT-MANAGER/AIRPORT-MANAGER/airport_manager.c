@@ -81,24 +81,32 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
 int add_flight(airport *airport, flight *flight) {
     
     if(airport->total_flights == 0) {
-        if((airport->flights = malloc(1*sizeof(flight))) == NULL) {
+        if((airport->flights = malloc(sizeof(*flight)*1)) == NULL) {
             perror("no more memory to add flight");
             exit(0);
          }
         airport->total_flights = 0;
         airport->total_flights += 1;
+        if((airport->flights[0] = malloc(sizeof(flight))) == NULL) {
+            perror("no more memory to create flight");
+            exit(0);
+        }
         airport->flights[0] = flight;
         return TRUE;
             
     }else {
         airport->total_flights += 1;
-        airport->flights = realloc(airport->flights, airport->total_flights*sizeof(flight));
-        //printf("sizeof flights array:%d", sizeof(airport->flights));
-        printf("total flights:%d", airport->total_flights);
+        airport->flights = realloc(airport->flights, airport->total_flights*sizeof(*flight));
         if(airport->flights == NULL) {
             perror("no more memory to add flight");
             exit(0);
         }
+        
+        if((airport->flights[airport->total_flights] = malloc(sizeof(flight))) == NULL) {
+            perror("no more memory to create flight");
+            exit(0);
+        }
+        
         airport->flights[airport->total_flights] = flight;
         return TRUE;
     }
@@ -156,7 +164,8 @@ void print_schedule(airport *airport) {
     }
     
     for(int i=0; i<airport->total_flights; i++) {
-        printf("\nAirline: %s\n", airport->flights[i]->airline);
+        printf("\nAirline: %s\n", airport->flights[i]
+               ->airline);
         printf("%s ----> %s\n", airport->flights[i]->origin, airport->flights[i]->destination);
         printf("Time %d:%d", airport->flights[i]->hour, airport->flights[i]->minutes);
     }
