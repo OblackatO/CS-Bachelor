@@ -63,7 +63,9 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
         flight_to_return->hour = hour; flight_to_return->minutes = min;
         flight_to_return->gate = gt;
         
-        if((flight_to_return->seats_map = malloc(sm_size*(sizeof(char)))) == NULL) {
+        flight_to_return->total_passengers = 0;
+        flight_to_return->max_passengers = sm_size;
+        if((flight_to_return->seats_map = malloc(sm_size*(sizeof(char*)))) == NULL) {
             perror("no more memory available to allocate flight seats.");
             exit(0);
         }
@@ -73,15 +75,16 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
     }
 }
 
-//already works
 int add_flight(airport *airport, flight *flight) {
     
-    /*if size of array of pointers to flight is 0, use malloc, other wise
-     *user realloc, because there are already some pointers to flight
+    /*
+     if size of array of pointers to flight is 0, use malloc, otherwise
+     use realloc, because there are already some pointers to flight.
      Please note a very important fact that I'm allocating sizeof(*flight)
      and not sizeof(flight), as it is an array of pointers. If sizeof(flight)
      is used, the program will act in a stranger way.
      */
+    
     if(airport->total_flights == 0) {
         if((airport->flights = malloc(sizeof(*flight)*1)) == NULL) {
             perror("no more memory to add flight");
@@ -104,31 +107,87 @@ int add_flight(airport *airport, flight *flight) {
     }
 }
     
-
-
-//to do. 
-
-int check_in(char *passenger_name, int flight_number, airport *airport) {
+int check_in(char *passenger_name, flight *flight) {
     
+    if(flight == NULL) {
+        printf("Flight does not exit.\n");
+        return FALSE;
+    }
+    
+    if(flight->total_passengers == flight->max_passengers) {
+        printf("No more places available.\n");
+        return FALSE;
+    }
+    
+    flight->seats_map[flight->total_passengers++] = passenger_name;
     return TRUE;
+}
+
+void show_passengers(flight *flight) {
     
+    if(flight->total_passengers == 0) {
+        printf("No passengers were added.\n");
+        return;
+    }
     
+    if(flight == NULL) {
+        printf("Flight does not exist.");
+        return;
+    }
+    
+    //Let's use a while loop, no for loop this time.
+    int start_index = 0;
+    while(!(start_index == flight->total_passengers)) {
+        printf("Seat:%d Passenger:%s", start_index+1, flight->seats_map[start_index]);
+        start_index++;
+    }
 }
 
 
-//does not work correctly. : I know a solution will do it when I have time.
-int remove_flight(airport *airport, int flight_number) {
-    
-    int total_flights = airport->total_flights;
-    for(int i=0; i<total_flights; i++) {
+/* flight *search_flight(airport *airport, int flight_number)
+ *----------------------
+ * searches a flight by its number in the array of pointers to flight
+ * in a given airport.
+ *
+ * *airport : pointer to the airport where we want to look for the flight
+ * flight_number : Flight number of the flight we want to get
+ *
+ * returns : *flight if match found for the given flight_number
+ *           NULL if match not found for the given flight_number
+ */
+flight *search_flight(airport *airport, int flight_number) {
+    for(int i=0; i<airport->total_flights; i++) {
         if(airport->flights[i]->flight_number == flight_number) {
-            printf("Flight about to be deleted...");
-            free(airport->flights[i]) ; airport->flights[i] = NULL;
-            airport->flights = realloc(airport->flights, --airport->total_flights*sizeof(airport->flights[0]));
-            return TRUE;
+            return airport->flights[i];
         }
     }
-    return FALSE;
+    return NULL;
+}
+
+int remove_flight(airport *airport, flight *flight_to_remove) {
+    
+    if(airport->total_flights == 0  || flight_to_remove == NULL) {
+        printf("Flight is not in airport:%s\n", airport->name);
+        return FALSE;
+    }
+    
+    flight **new_flight_array;
+    if((new_flight_array = malloc(sizeof(flight*)*airport->total_flights-1)) == NULL) {
+        perror("no more memory available");
+        exit(1);
+    }
+    
+    for(int i=0; i<airport->total_flights; i++) {
+        if(airport->flights[i]->flight_number == flight_to_remove->flight_number) {
+            free(airport->flights[i]); airport->flights[i] = NULL;
+            continue;
+        }else {
+            *(new_flight_array + i) = airport->flights[i];
+        }
+    }
+    airport->flights = new_flight_array;
+    airport->total_flights--;
+    return TRUE;
 }
 
 void print_schedule(airport *airport) {

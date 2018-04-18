@@ -23,12 +23,13 @@ int main() {
     }
     
     while(choice != 0) {
-        printf("\n\tAIRPORT MANAGER\t\n");
+        printf("\n\t\tAIRPORT MANAGER\t\t\n");
         printf("1. SET CURRENT AIRPORT\n");
         printf("2. CREATE && ADD FLIGHT TO AIRPORT.\n");
         printf("3. CHECK IN PASSENGER.\n");
         printf("4. REMOVE FLIGHT.\n");
         printf("5. SHOW SCHEDULE.\n");
+        printf("6. SHOW PASSENGERS.\n");
         printf("0. EXIT.\n");
         printf("Your choice:");
         if(scanf("%d", &choice) <= 0) {
@@ -147,9 +148,10 @@ int main() {
             
             int flight_number = 0;
             
-            printf("Flight Number(max 20 chars):\n");
+            printf("Flight Number(max 5 chars):\n");
             scanf("%d", &flight_number);
-            if (check_in(name, flight_number, current_airport) == TRUE) {
+            
+            if (check_in(name, search_flight(current_airport, flight_number)) == TRUE) {
                 printf("Check-In made.");
                 free(name); name = NULL;
             }
@@ -160,7 +162,7 @@ int main() {
             printf("Flight Number(max 20 chars):\n");
             scanf("%d", &flight_number);
             
-            if(remove_flight(current_airport, flight_number) == TRUE) {
+            if(remove_flight(current_airport, search_flight(current_airport, flight_number)) == TRUE) {
                 printf("Flight was successfully removed");
             }else {
                 printf("Flight was not removed");
@@ -168,6 +170,15 @@ int main() {
         }else if(choice == 5) {
             
             print_schedule(current_airport);
+            
+        }else if(choice == 6) {
+            
+            int flight_number = 0;
+            
+            printf("Flight Number(max 20 chars):\n");
+            scanf("%d", &flight_number);
+            
+            show_passengers(search_flight(current_airport, flight_number));
             
         }else {
             break;

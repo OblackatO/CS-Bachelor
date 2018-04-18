@@ -15,7 +15,7 @@ typedef struct flight {
     char *origin, *destination;
     int hour, minutes;
     int gate;
-    int total_passengers;
+    int total_passengers, max_passengers;
     char **seats_map;
     
     
@@ -37,9 +37,11 @@ flight *new_flight(char *al, int fn, char *or, char *des, int hour, int min, int
 
 
 int add_flight(airport *airport, flight *flight);
-int check_in(char *passenger_name, int flight_number, airport *airport);
-int remove_flight(airport *airport, int flight_number);
+int check_in(char *passenger_name, flight *flight);
+flight *search_flight(airport *airport, int flight_number);
+int remove_flight(airport *airport, flight *flight_to_remove);
 void print_schedule(airport *airport);
+void show_passengers(flight *flight);
 
 
 
