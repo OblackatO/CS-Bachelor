@@ -16,3 +16,6 @@ linguist-vendored
 linguist-vendored
 *.c linguist-vendored=true
 
+linguist-vendored
+*.swift linguist-vendored=true
+
