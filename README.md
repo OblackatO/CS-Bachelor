@@ -25,6 +25,8 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
      |________ General Maths 2  
      |  
      |________ Gestion Projets
+     |
+     |________ Swift Labs
 ```
 
 ### Remarks : 
