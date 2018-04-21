@@ -164,6 +164,26 @@ flight *search_flight(airport *airport, int flight_number) {
     return NULL;
 }
 
+int free_flight(airport *current_airport, flight *flight_to_free) {
+    
+    //Frees arrays of chars
+    free(flight_to_free->airline);
+    free(flight_to_free->destination); free(flight_to_free->origin);
+    
+    /*Frees array of strings, do not need to free each place
+     as in the creation of the flight I allocate the maximum numbers of places
+     input by the user. It would be a wiser implementation to allocate/reallocate the
+     array when a check in is made, and in that case I would need to free() every
+     place in the sets_map using a for loop for instance.
+     */
+    free(flight_to_free->seats_map);
+    free(flight_to_free); flight_to_free = NULL; //=NULL avoid dangling pointer
+    
+    
+    
+    return TRUE;
+}
+
 int remove_flight(airport *airport, flight *flight_to_remove) {
     
     if(airport->total_flights == 0  || flight_to_remove == NULL) {
@@ -171,22 +191,30 @@ int remove_flight(airport *airport, flight *flight_to_remove) {
         return FALSE;
     }
     
-    flight **new_flight_array;
-    if((new_flight_array = malloc(sizeof(flight*)*airport->total_flights-1)) == NULL) {
-        perror("no more memory available");
+    int index_OfFound_Flight = 0;
+    for(int i=0; i<airport->total_flights; i++) {
+        if(airport->flights[i]->flight_number == flight_to_remove->flight_number) {
+            
+            index_OfFound_Flight = i;
+            if(free_flight(airport, airport->flights[i]) == TRUE) {
+                    
+            }else {
+                printf("An error occurred while removing flight:%s", airport->code);
+                exit(1);
+            }
+        }
+    }
+    
+    airport->total_flights--;
+    for(int i = index_OfFound_Flight; i<airport->total_flights; i++) {
+        airport->flights[i] = airport->flights[i+1];
+    }
+    
+    if((airport->flights = realloc(airport->flights, airport->total_flights*sizeof(flight *))) == NULL) {
+        perror("An error occurred while reallocate flight array ");
         exit(1);
     }
     
-    for(int i=0; i<airport->total_flights; i++) {
-        if(airport->flights[i]->flight_number == flight_to_remove->flight_number) {
-            free(airport->flights[i]); airport->flights[i] = NULL;
-            continue;
-        }else {
-            *(new_flight_array + i) = airport->flights[i];
-        }
-    }
-    airport->flights = new_flight_array;
-    airport->total_flights--;
     return TRUE;
 }
 
