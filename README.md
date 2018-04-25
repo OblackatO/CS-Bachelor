@@ -39,5 +39,5 @@ This is **not** a realistic view of all the subjects I have been covering in my 
 ![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/logo_uni.jpg)
 
 
-#### Joke of the week 16/4/2018 -- 22/4/2018: 
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/main-qimg-2e3206445819b42a895ba8234a24ec71-c.jpeg)
+#### Joke of the week 23/4/2018 -- 29/4/2018: 
+![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/9fR2CuE.jpg)
