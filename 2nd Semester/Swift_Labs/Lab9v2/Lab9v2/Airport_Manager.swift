@@ -11,7 +11,11 @@ import Foundation
 class AirportManager {
     
     var schedule = [Flight]()
+    let airport : AirPort
     
+    init(_ airport: AirPort) {
+        self.airport = airport
+    }
     
     func add_flight(_ flight: Flight) {
         self.schedule.append(flight)
@@ -20,30 +24,25 @@ class AirportManager {
     var departures = [Flight]()
     var arrivals = [Flight]()
     
-    //I am not using closures unless someone puts a gun in my head and says to do so.
-    //I will gladly lose marks in the exam if needed, just not to use them.
+    //closures suck, even more than java itself.
+    func FlightsFilter(filter: (Flight) -> Bool) {
+        for flight in self.schedule.filter(filter) {
+            flight.print_flight_info()
+        }
+    }
+        
     func printSchedule() {
+        print("*****Flights Schedule*****")
         
-        for flight in self.schedule {
-            if flight.origin_destination.0 == "Lu" {
-                departures.append(flight)
-            }else {
-                arrivals.append(flight)
-            }
+        print("     Departures:          ")
+        FlightsFilter() {flight in return
+            flight.origin_destination.0 == airport.name
         }
         
-        print("Departures:")
-        for flight in self.departures {
-            print("\n")
-            print(flight.print_flight_info())
+        print("     Arrivals:          ")
+        FlightsFilter() {flight in return
+            flight.origin_destination.1 == airport.name
         }
-        
-        print("Arrivals:")
-        for flight in self.arrivals {
-            print("\n")
-            print(flight.print_flight_info())
-        }
-        
     }
 }
 

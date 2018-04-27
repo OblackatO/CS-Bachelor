@@ -8,10 +8,10 @@
 
 import Foundation
 
-let airport_manager = AirportManager()
-
 let airport = AirPort("Luxairport")
 let airline = Airline("Luxair")
+
+let airport_manager = AirportManager(airport)
 
 let airport1 = AirPort("Berlin")
 let airline1 = Airline("Luxair")
@@ -45,6 +45,8 @@ flight1.print_seatmap()
 
 
 airport_manager.printSchedule()
+print("\n")
+flight1.print_passengerslist()
 
 
 

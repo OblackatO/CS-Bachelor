@@ -87,25 +87,24 @@ class Flight {
     
     func print_seatmap() {
         
-        for row in 0...self.seat_map.count-1 {
-            for seat in 0...self.seat_map[row].count-1 {
+        for row in 0..<self.seat_map.count {
+            for seat in 0..<self.seat_map[row].count {
                 if self.seat_map[row][seat] != nil {
-                    print("Seat:\(row):\(seat):Occupied")
+                    print(terminator:"*")
                 }else {
-                    print("Seat:\(row):\(seat):Free")
+                    print(terminator:"_")
                 }
             }
+            print()
         }
-        
+        //print()
     }
     
     func print_passengerslist() {
-        for row in 0...self.seat_map.count-1 {
-            print("\n")
-            for seat in 0...self.seat_map[row].count-1 {
-                if self.seat_map[row][seat] != nil {
-                    let p = self.seat_map[row][seat]
-                    print("\(row)--\(seat):\(p!.name)")
+        for x in 0..<self.seat_map.count {
+            for y in 0..<self.seat_map[x].count {
+                if let p = self.seat_map[x][y] {
+                    print("Seat:\(x+1)--\(y+1):\(p.name)")
                 }
             }
         }
