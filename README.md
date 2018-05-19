@@ -40,4 +40,4 @@ This is **not** a realistic view of all the subjects I have been covering in my 
 
 
 #### Joke from 6/5/2018 to 19/5/2018: 
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/df31af14c0707cb4ab457cd36b864e8f--dose-programming.jpg)
+![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/may>19.jpg)
