@@ -19,3 +19,5 @@ linguist-vendored
 linguist-vendored
 *.swift linguist-vendored=true
 
+linguist-vendored
+*.sql linguist-vendored=true
