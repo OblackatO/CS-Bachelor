@@ -32,7 +32,7 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
 ### Remarks : 
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
-This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them which the contents makes sense to be shared.
+This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them which the contents make sense to be shared.
 
 
 ![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/f8e72e7d126772e56a65295c28020e17.jpg)
