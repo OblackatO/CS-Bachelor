@@ -47,5 +47,5 @@ This is **not** a realistic view of all the subjects I have been covering in my 
 ![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/logo_uni.jpg)
 
 
-#### Joke from 01/5/2018 to 15/09/2018 (3th sem starts): 
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/may>19.jpg)
+#### Joke of the month: 
+![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/big_fan.jpg)
