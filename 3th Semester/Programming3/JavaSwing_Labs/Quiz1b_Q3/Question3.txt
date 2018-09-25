@@ -1,0 +1,39 @@
+Complete the following Swing code to realize a numerical pad with 12 buttons that can be used to enter text into the textfield on top of the UI.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+import javax.swing.*;
+import java.awt.*;
+
+public class NumPad
+{
+    public static void main(String[] args)
+    {
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                JFrame  F = new JFrame("NumPad");
+                F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                F.setSize(400, 300);
+                F.setVisible(true);
+                F.getContentPane().setLayout(new BorderLayout());
+
+                JTextField  T   =   new JTextField();
+                F.getContentPane().add(T,BorderLayout.NORTH);
+
+                JPanel  P = new JPanel();
+                F.getContentPane().add(P,BorderLayout.CENTER);
+
+                P.setBackground(Color.GREEN);
+
+                // STEP 1: create 12 buttons
+
+                // STEP 2: set layout of panel
+
+                // STEP 3: add buttons to panel
+
+                // STEP 4: add listeners
+
+            } });
+    }
+}

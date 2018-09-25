@@ -29,6 +29,14 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
      |________ Swift Labs
 ```
 
+**3th Semester**
+```
+     |  
+     |_________ JavaSwing Labs
+     |  
+     |________ (Probably more will show up...)
+```
+
 ### Remarks : 
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
