@@ -1,0 +1,64 @@
+Complete the following Swing code to realize an Interface with two menus:
+
+- a menu 'color' with the submenus red, green and blue,
+
+- a menu 'name' with the submenus Alice, Bob and Carol
+
+ 
+
+ 
+
+Add listeners so that the choice of a submenu adjusts the color and the name of the label.
+
+package menu_example;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+
+public class Main
+{
+    
+    static    JLabel    B    =    new    JLabel();
+    
+    public static void main(String[] args)
+    {
+        
+        javax.swing.SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                JFrame    F    =    new    JFrame();
+                F.setTitle("JMenu Exercise");                         
+                F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                F.getContentPane().add(B);
+                B.setOpaque(true);
+                B.setHorizontalAlignment(JLabel.CENTER);
+               
+                
+                F.setJMenuBar(createJMenuBar());
+
+                F.setSize(400,400);                   // set Window size
+                F.setVisible(true); 
+            }
+        });
+    }
+
+    static    JMenuBar    createJMenuBar()
+    {
+        JMenuBar    M    =    new    JMenuBar();
+        
+        // ADD CODE HERE
+        
+        return M;
+    }
+       
+}
