@@ -32,9 +32,11 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
 **3th Semester**
 ```
      |  
-     |_________ JavaSwing Labs
+     |_________ Programming3(JavaSwing Labs)
      |  
-     |________ (Probably more will show up...)
+     |________ Algorithms2
+     |
+     |________ Operating Systems2
 ```
 
 ### Remarks : 
