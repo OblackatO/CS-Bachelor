@@ -1,0 +1,9 @@
+girl
+stars
+Once upon a time there was a little
+hello\nthis is a test\n to check the consistency fo the file
+hello \n
+hello\nthis is a test\n to check the consistency fo the file
+The boy that was counting
+did not count them very well.
+that was counting stars

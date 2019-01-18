@@ -46,7 +46,7 @@ public class Main {
                             T.setText("")
                         );
                     }
-                    button_test.setPreferredSize(new Dimension(125,50));
+                    button_test.setPreferredSize(new Dimension(130,70));
                     P.add(button_test);
                 }
             } });

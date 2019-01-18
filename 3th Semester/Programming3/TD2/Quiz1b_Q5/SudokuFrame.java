@@ -19,7 +19,6 @@ class SudokuFrame extends JFrame{
         for(int i=0; i<9; i++){
             this.add(createpanel());
         }
-
     }
 
     public JPanel createpanel(){

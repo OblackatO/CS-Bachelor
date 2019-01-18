@@ -29,7 +29,6 @@ public class DotsPanel extends JPanel implements MouseListener, ActionListener {
                 g.fillOval(p.x,p.y,7,7);
             }
         }
-
     }
 
     private void removePoints(){

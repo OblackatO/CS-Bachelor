@@ -1,0 +1,3 @@
+hello\nthis is a test\n to check the consistency fo the file
+hello \n
+hello\nthis is a test\n to check the consistency fo the file

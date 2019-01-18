@@ -16,7 +16,7 @@ public class Speed {
                 F.setTitle("Speedmeter");
                 F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                JSlider    S    =    new    JSlider(0, 180,100);
+                JSlider    S    =    new    JSlider(0, 180,0);
                 JPanel    P    =    new    SpeedPanel(S.getModel());
 
                 F.getContentPane().add(P);

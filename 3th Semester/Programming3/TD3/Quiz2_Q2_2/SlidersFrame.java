@@ -21,6 +21,8 @@ public class SlidersFrame extends JFrame {
 
         // ADD TOP PANEL
         JPanel    P1    =    new JPanel();
+
+        //Panel with sliders
         JPanel    P2    =    new JPanel();
         P2.setLayout(new GridLayout(3,1,100,5));
         ChangeListener L    = new ChangeListener() {
