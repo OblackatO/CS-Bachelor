@@ -1,0 +1,10 @@
+Instructions:
+============================================================================
+[>]Problem1_i[<]
+[>] Launch a grunt instance, typing "pig" in a terminal.
+[>] In the grunt terminal give the following command: "exec Problem1_i.pig"
+After the program runs the output should be in a file called: part_0000
+Remarks: 
+[>]Make sure that there are no previous outputs of pig in the cwd.
+[>]DO NOT forget to change the path of the yago dataset to your path.
+=============================================================================

@@ -1,0 +1,20 @@
+Command given to access the cloud
+ssh -i secret_amazon_cloud.pem ubuntu@54.90.5.120
+
+Command given to copy files to the cloud:
+"scp -i secret_amazon_cloud.pem -r Exercise3_aws ubuntu@54.90.5.120:incoming/Assignment2"
+
+Commands given to setup ENV variables in the cloud:
+"""
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+export HADOOP_HOME=/home/ubuntu/hadoop/hadoop-3.1.2
+export PATH=$HADOOP_HOME/bin:$PATH
+
+export HIVE_HOME=/home/ubuntu/apache-hive-3.1.2-bin
+export PATH=$HIVE_HOME/bin:$PATH
+
+export DERBY_HOME=/home/ubuntu/db-derby-10.11.1.1-bin
+export PATH=$PATH:$DERBY_HOME/bin
+export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
+"""

@@ -4,7 +4,7 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
 
 ## Structure 
 
-**1st Semester**
+**1st Semester**(LU-Belval)
 ```      
      |  
      |_________ General Maths 1 
@@ -15,7 +15,7 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
 ```
 
 
-**2nd Semester** 
+**2nd Semester**(LU-Belval)
 ```    
      |  
      |_________ Analyse && Conception 
@@ -29,34 +29,36 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
      |________ Swift Labs
 ```
 
-**3th Semester**
+**3th Semester**(LU-Belval)
 ```
      |  
      |_________ Programming3(JavaSwing Labs)
      |  
-     |________ Algorithms2
+     |________ Algorithms 2
      |
-     |________ Operating Systems2
+     |________ Operating Systems 2
 ```
 
-**4th Semester**
+**4th Semester**(CZ-Brno)
 ```
      |_________ PV204 Security Technologies(Please read the remarks)
-     |  
-     |________ Randomized Computations and Algorithms(A folder will be soon created)
+```
+
+**5th Semester**(LU-Belval)
+```
+     |_________ Circuits Numériques(Please read the remarks)
+     |
+     |_________ Web Programming
+     |
+     |_________ Cloud Computing
+     |
+     |_________ Data Analysis with R
 ```
 
 ### Remarks : 
 
-[The PV204 course has a dedicated rep](https://github.com/OblackatO/PV204-Security-Technologies)   
+[The PV204 course has a dedicated rep](https://github.com/OblackatO/PV204-Security-Technologies)  
+[Circuits Numériques has a dedicated rep](https://github.com/OblackatO/CircuitsNumeriquesTravail/settings)
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
 This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them which the contents make sense to be shared.
-
-
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/f8e72e7d126772e56a65295c28020e17.jpg)
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/logo_uni.jpg)
-
-
-#### Joke : 
-![alt text](https://github.com/pegom96/CS-Bachelor/blob/master/Pics%20/big_fan.jpg)

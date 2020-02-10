@@ -1,0 +1,11 @@
+Instructions:
+============================================================================
+[>]Problem2_i[<]
+[>]Convert the java file to a jar, or just download the jar here:
+https://mega.nz/#!3zwykaQb!tVblQ8V6HdA9f0CHIh5SFpLtFVsmr87fILuetTf-h2I
+[>] In the grunt terminal give the following command: "exec Problem2_i.pig"
+After the program runs the output should be in a file called: part_0000
+Remarks: 
+[>]Make sure that there are no previous outputs of pig in the cwd.
+[>]DO NOT forget to change the path of the yago dataset to your path.
+=============================================================================

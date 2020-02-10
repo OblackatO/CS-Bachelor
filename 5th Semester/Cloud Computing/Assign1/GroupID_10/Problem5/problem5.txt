@@ -1,0 +1,14 @@
+For this problem, please have a look at the file ReduceSideJoin.java
+Once you have the jar of it, you can run it with:
+
+hadoop jar project.jar "/home/peterpan/Downloads/yago_full_clean.tsv" output 
+
+You should get an output file, where the format will look similar to:
+
+<Aabid_Nassar>	[(<livesIn>,<Ernakulam>), (<hasGivenName>,<Aabid>)]
+...
+<Đurađ_Jakšić>	[(<livesIn>,<Novi_Sad>), (<hasGivenName>,<Đurađ>)]
+...
+
+[>]You need ofc to replace the path of the yaho dataset to your own
+[>]Please do not forget to "rm -Rf output" if subsequent runs.

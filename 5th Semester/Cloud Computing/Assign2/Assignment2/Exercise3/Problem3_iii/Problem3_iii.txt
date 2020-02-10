@@ -1,0 +1,11 @@
+Instructions:
+============================================================================
+[>]Problem3_ii[<]
+[>]Start by init a metastore, with the following command: "schematool -dbType derby -initSchema"
+(change -dbType for your desired dbType, if needed.)
+[>]If you have hive in your PATH, simply type: "hive -f Problem_iii.hql"
+[>]Finally, type: "hive -f Problem_iii_2.hql"
+[>]After the computations you should be able to see the results.
+Remarks: 
+[>]DO NOT forget to change the path of the yago dataset to your path.
+=============================================================================

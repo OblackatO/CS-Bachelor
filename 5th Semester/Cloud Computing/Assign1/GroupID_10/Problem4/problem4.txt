@@ -1,0 +1,23 @@
+##########################################################################################################
+1st POINT:
+In order to obtain set1.txt, please see the file WordCount2.java .Once you have the jar launch the command:
+
+hadoop jar project.jar "/home/peterpan/Downloads/yago_full_clean.tsv" output 
+
+An output file called, "set1.txt" with around 3,1MB will show up in the cwd. 
+##########################################################################################################
+
+##########################################################################################################
+2nd POINT
+Once you have the set1.txt, you can use it in the second part. Please see the file MemoryBackedJoin.java 
+for more details. Once the jar of MemoryBackedJoin.java is generated, launch:
+
+hadoop jar project.jar "/home/peterpan/Downloads/yago_full_clean.tsv" output -cached_subjects set1.txt
+
+You should get a file called "part-r-00000" with around 22MB with the expected result.
+##########################################################################################################
+
+[>]Both programs should only take some seconds to run.
+[>]You need ofc to replace the path of the yaho dataset to your own
+[>]Please do not forget to "rm -Rf output" if subsequent runs.
+

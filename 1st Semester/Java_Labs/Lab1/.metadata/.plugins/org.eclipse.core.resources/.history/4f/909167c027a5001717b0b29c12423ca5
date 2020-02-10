@@ -1,9 +1,0 @@
-package lu.uni.helloworld;
-
-import java.util.Scanner; 
-
-public class AgeInput {
-	
-	
-
-}
