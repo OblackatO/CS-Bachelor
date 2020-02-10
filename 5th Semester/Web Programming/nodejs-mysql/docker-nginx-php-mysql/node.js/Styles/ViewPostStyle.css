@@ -1,0 +1,128 @@
+.label {
+    text-align: center;
+    background-color: darkcyan;
+    color: black;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.label_text {
+    text-align: center;
+    background-color: antiquewhite;
+    color: black;
+    font-size: medium;
+    padding: 1%;
+}
+
+/*Follow button style*/
+button[type=follow] {
+    margin-top: 3px;
+    background-color: darkcyan;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    float: left;
+    width: 20%;
+}
+
+.chat_title {
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 2px;
+    background-color: green;
+}
+
+/* goback button style*/
+button[type=goback] {
+    background-color: darkcyan;
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 20%;
+    margin-bottom: 3px;
+}
+
+
+/*WebChat style*/
+/****************************************************************/
+#chat { width: 97%; }
+.message { font-weight: bold; }
+.message:before { content: ' '; color: #bbb; font-size: 14px; }
+					
+#log {
+    overflow: auto;
+    max-height: 300px;
+    list-style: none;
+    padding: 0;
+}
+					
+#log li {
+    border-top: 1px solid #ccc;
+    margin: 0;
+    padding: 10px 0;
+}
+					
+body {
+    font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
+    background: rgb(237, 237, 236);
+    margin: 0;
+    margin-top: 40px;
+    padding: 0;
+}
+					
+section, header {
+    display: block;
+}
+					
+#wrapper {
+    width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    border-top: 1px solid #fff;
+    padding-bottom: 16px;
+}
+					
+h1 {
+    padding-top: 10px;
+}
+					
+h2 {
+    font-size: 100%;
+    font-style: italic;
+}
+					
+header, article > * {
+    margin: 20px;
+}
+					
+#status {
+    padding: 5px;
+    color: #fff;
+    background: #ccc;
+}
+					
+#status.fail {
+    background: #c00;
+}
+					
+#status.success {
+    background: #0c0;
+}
+					
+#status.offline {
+    background: #c00;
+}
+					
+#status.online {
+    background: #0c0;
+}
+					
+#html5badge {
+    margin-left: -30px;
+    border: 0;
+}
+					
+#html5badge img {
+    border: 0;
+}

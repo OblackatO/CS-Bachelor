@@ -1,0 +1,151 @@
+<!--To automatically redirect to certain page: https://stackoverflow.com/questions/9581268/how-can-i-redirect-a-php-page-to-another-php-page#9581301-->
+<!--https://github.com/janmarkuslanger/attention.js:nice alerts js -->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="Styles/LoginStyles.css">
+  <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+</head>
+<body>
+  <div></div>
+  <fieldset id="overall_field">
+    <legend>Twinfo Login:</legend>
+        <text>Username:</text><br>
+        <input name="username" type="text" id="username_field" name="username">
+        <text>Password:</text><br>
+        <input name="password" type="password" id="password_field" name="password">
+    
+        <input id="login_button" type="submit" value="Login">
+        <button id="register_button">Register</button>
+    
+  </fieldset>
+    <script type="text/javascript" src="/JSScripts/js_sha256.js"></script>
+    <script>
+        //Checks if user has session established. If yes, automatically logs in.
+        function sleep(ms) {
+            //artificial delay to check loading circle design
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        window.onload = async function() { 
+            const session_value = window.localStorage.getItem("session_id");
+            console.log("session_value:"+session_value)
+            session_value_uuid = JSON.parse(session_value);
+            console.log("this is the session value:"+session_value_uuid.session_id);
+            if(session_value != null){
+                document.getElementsByTagName("div")[0].setAttribute("class", "loader");
+                const x = document.getElementById("overall_field");
+                if (x.style.display === "none") {
+        	        x.style.display = "block";
+  		        } else {
+    		        x.style.display = "none";
+                }              
+                var requester = new XMLHttpRequest();
+                var url = "http://localhost:80/SessionValidation";
+                requester.open("POST", url);
+                requester.setRequestHeader("Content-Type", "application/json");
+                requester.onreadystatechange = async function () {
+                    console.log("response:"+requester.responseText);
+                    await sleep(1100); 
+                    if(requester.responseText == "Invalid"){
+                        document.getElementsByTagName("div")[0].setAttribute("class", "");
+                        if (x.style.display === "none") {
+        	                x.style.display = "block";
+  		                } else {
+    		                x.style.display = "none";
+		                }
+                        return;
+                    }else{
+                        console.log("session verified response:"+requester.responseText);
+                        document.location.href = '/MainFeed'
+                    }
+                }  
+                var data = JSON.stringify({"session_id": session_value_uuid.session_id});
+                requester.send(data);
+            
+            }else{
+                return;
+            }  
+        };
+
+        function generate_random(length) {
+            /* This random generating function was taken from:
+             * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+             * This is not Plagiarism -.- 
+            */
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        /*Buttons event listeners*/
+        /*************************************/
+        //Handle Register button click
+        var btn = document.getElementById('register_button');
+        btn.addEventListener('click', function() {
+            document.location.href = '/Register';
+        });
+
+        //Handle Login button click
+        var btn = document.getElementById('login_button');
+        btn.addEventListener('click', function() {
+            var x = document.getElementById("overall_field");
+            if (x.style.display === "none") {
+        	    x.style.display = "block";
+  		    } else {
+    		    x.style.display = "none";
+		    }
+            document.getElementsByTagName("div")[0].setAttribute("class", "loader");
+            const random_bytes = generate_random(24);
+            const username_value = document.getElementById("username_field").value;
+            var requester = new XMLHttpRequest();
+            var url = "http://localhost:80/Login";
+            requester.open("POST", url);
+            requester.setRequestHeader("Content-Type", "application/json");
+            requester.onreadystatechange = function () {
+                if(requester.responseText.includes("ALREADY ESTABLISHED")){
+                    alert("Session already estabished elsewhere.")
+                    window.location.reload(false);
+                    return;
+                }
+                if (requester.status === 200) {
+                    const password_value = document.getElementById("password_field").value;
+                    console.log("Values before hashing on client: \npwd:"+password_value);
+                    console.log("server secret:"+JSON.parse(requester.responseText).server_secret);
+                    console.log("client secret:"+random_bytes);
+                    const realibility_computation = random_bytes+password_value+JSON.parse(requester.responseText).server_secret
+                    console.log("TEXT ABOUT TO BE HASHED:"+realibility_computation)
+                    var shaObj = new jsSHA("SHA-256", "TEXT");
+                    shaObj.update(realibility_computation);
+                    var hash = shaObj.getHash("HEX");
+                    console.log("hash test:"+hash);
+                    var requester2 = new XMLHttpRequest();
+                    requester2.open("POST", "http://localhost:80/LoginStep2")
+                    requester2.setRequestHeader("Content-Type", "application/json");
+                    requester2.onreadystatechange = function () {
+                        if(requester2.responseText != "not done"){
+                            localStorage.setItem('session_id', requester2.responseText);
+                            document.getElementsByTagName("div")[0].setAttribute("class", "");
+                            document.location.href = '/MainFeed'
+                        }
+                    }
+                    var data = JSON.stringify({
+                        "username": username_value, 
+                        "password": password_value,
+                        "hash": hash
+                    });
+                    requester2.send(data);                
+                }
+            };
+            var data = JSON.stringify({"username": username_value, 
+                                       "secret": random_bytes,
+                                    });
+            requester.send(data);
+        });
+        /***************************************/  
+    </script>
+</body>
+</html>

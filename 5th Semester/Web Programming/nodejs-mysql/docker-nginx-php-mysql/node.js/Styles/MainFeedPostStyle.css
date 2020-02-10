@@ -1,0 +1,73 @@
+/*
+ * All Styles for the elements on the file HtmlPages/MainFeedPost.html
+*/
+
+input[type=text], select, textarea{
+    width: 95%;
+    padding: 8px;
+    border: 2.5px solid rgb(0, 109, 36);
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    float: left;
+}
+  
+  /*Labels next to input fields style. */
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  /*Post button style*/
+  button[type=submit] {
+    background-color: darkcyan;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    float: right;
+    width: 20%;
+  }
+  
+  /* goback button style*/
+  button[type=goback] {
+    background-color: darkcyan;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    float: left;
+    width: 20%;
+  }
+
+  .container {
+    border-radius: 7px;
+    background-color: #f2f2f298;
+    padding: 14px;
+  }
+  
+  /*Columns floating attribute for wheh width==30% && 60%*/
+  .col-25 {
+    float: left;
+    width: 30%;
+    margin-top: 6px;
+  }
+  
+  .col-75 {
+    float: left;
+    width: 60%;
+    margin-top: 10px;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Stacks columns when the maximum sreen == 500xp*/
+  @media screen and (max-width: 500px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+  }

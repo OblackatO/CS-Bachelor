@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link title="MainFeedPostStyle" rel="stylesheet" href="Styles/MainFeedPostStyle.css">
+    <link title="MainFeedStyle" rel="stylesheet" href="Styles/MainFeedStyle.css">
+    <link title="ViewPostStyle" rel="stylesheet" href="Styles/ViewPostStyle.css"> 
+</head>
+<body id="main_body">
+    
+</body>
+
+<script>
+    switch_style("MainFeedStyle");
+    function heartbeat() {
+        /* NOTE: This function is from the official documentation
+         * of ws. If a hearthbeat is not sent in a certain interval, 
+         * the websocket will close prematurely. Either from the client side
+         * or server side. See the README.md of: https://github.com/websockets/ws*/
+        console.log("In heartbeat function")
+        clearTimeout(this.pingTimeout);
+    }
+
+    //Websocket connection
+    /*************************************************/
+    let socket = new WebSocket("ws://localhost");
+    socket.onopen = function(e) {
+        //Request html code for MainFeed
+        heartbeat();
+        socket.send('MainFeed');
+    };
+    socket.onclose = function clear (){
+        clearTimeout(this.pingTimeout);
+    }
+    socket.onmessage = function(event) {
+        console.log(`[message] Data received from server: ${event.data}`);
+        if(JSON.stringify(event.data).includes("MainFeedPost")){
+            switch_style("MainFeedPostStyle")
+            var btn = document.getElementById('main_body');
+            btn.innerHTML = JSON.parse(event.data).MainFeedPost;
+
+            var back_button = document.getElementById('goback')
+            //Calls MainFeed style on "back" button click
+            back_button.addEventListener('click', function() {  
+                socket.send('MainFeed')
+            });
+
+            function verify_input(input){
+                if(input == ""){
+                    return " cannot be empty.\n"
+                }else if(input.length < 3){
+                    return " is too small.\n"
+                }else{
+                    return "OK"
+                }
+            }
+
+            var post_button = document.getElementById("post_button")
+            post_button.addEventListener('click', function() {  
+                error_message = "";
+                internship_name = document.getElementById("internship_name").value
+                if(verify_input(internship_name) != "OK"){
+                    error_message += "[>]Internship"+verify_input(internship_name)+"\n"
+                }
+                company_name = document.getElementById("company_name").value
+                if(verify_input(company_name) != "OK"){
+                    error_message += "[>]Company name"+verify_input(company_name)+"\n"
+                }
+                start_date = document.getElementById("start_date").value
+                end_date = document.getElementById("end_date").value
+                if(verify_input(start_date) != "OK"){
+                    error_message += "[>]Start date"+verify_input(start_date)+"\n"
+                }
+                if(verify_input(end_date) != "OK"){
+                    error_message += "[>]End date"+verify_input(end_date)+"\n"
+                }
+                if(new Date(start_date) > new Date(end_date)){
+                    error_message += "[>]End date is earlier than start date."+"\n"
+                }
+                description = document.getElementById("description").value
+                if(verify_input(description) != "OK"){
+                    error_message += "[>]Description"+verify_input(description)+"\n"
+                }
+                if(error_message != ""){
+                    alert(error_message)
+                    return
+                }
+                post_data = {
+                    "name":internship_name, 
+                    "company_name":company_name, 
+                    "start_date":start_date,
+                    "end_date":end_date,
+                    "description":description
+                }
+                console.log("making post with the following data:"+JSON.stringify({"NEW_POST":post_data}))
+                socket.send(JSON.stringify({"NEW_POST":post_data}));
+                document.body.style.backgroundColor = "white"
+                alert("Internship sucessfully posted.")
+                socket.send('MainFeed');
+            });
+
+        }else if(JSON.stringify(event.data).includes("MainFeed")){
+            //Handles MainFeed style sent by server.
+            switch_style("MainFeedStyle")
+            socket.send("GET ALL POSTS");
+            var body_id = document.getElementById('main_body');
+            body_id.innerHTML = JSON.parse(event.data).MainFeed;
+            var btn_post = document.getElementById('post_internship');
+            btn_post.addEventListener('click', function() {  
+                socket.send("MainFeedPost");
+            });
+            var btn_disconnect = document.getElementById('disconnect')
+            btn_disconnect.addEventListener('click', function() {  
+                const session_value = localStorage.getItem("session_id");     
+                //Deletes session cookie
+                localStorage.removeItem("session_id") 
+                disconnect_data = {"Disconnect":session_value}
+                //Tells server to forget session 
+                socket.send(session_value); 
+
+            });
+        
+        }else if(JSON.stringify(event.data).includes("POSTS")){
+            parsed_data = JSON.parse(event.data);
+            //console.log("data acquired on the client:"+parsed_data.POSTS);
+            posts_table = document.getElementById("posts_table");
+            if(parsed_data == "None"){
+                posts_table.innerHTML = '<p align="center">There are no posts available.</p>'
+            }else{
+                /* Flow to convert string post data to json object:
+                 * Parse array with all posts with:
+                 * array_converted = JSON.parse(parsed_data.POSTS);
+                 * Iterate through it, stringify each JSON object(post) in the
+                 * array, and parse it again as a JSON object. 
+                 * Access all info necessary about the post. 
+                */
+                array_converted = JSON.parse(parsed_data.POSTS);
+                var all_columns = "";
+                var posts_ids = [];
+                for(i=0; i<array_converted.length; i++){
+                    stringified_post_data = JSON.stringify(array_converted[i])
+                    parsed_post = JSON.parse(stringified_post_data)
+                    id = parsed_post.id;
+                    posts_ids.push(id);
+                    start_date = String(parsed_post.start_date).replace("T00:00:00.000Z", "")
+                    end_date = String(parsed_post.end_date).replace("T00:00:00.000Z", "")
+                    var column = 
+                    `
+                    <div class="column">
+                        <h2>${parsed_post.name}</h2>
+                        <h3>Start:${start_date} -- End:${end_date}</h3>
+                        <h4>Company:${parsed_post.company}</h4>
+                        <button id=${id} class="button_view">View</button>
+                    </div>
+                    `
+                    all_columns += column;
+                }
+                //console.log("adding to innerHTML:"+all_columns);
+                function print_to_console(i){
+                    console.log("element:"+i)
+                    socket.send(JSON.stringify({"id":i, "order":"GET_POST_INFO"}));
+                }
+                posts_table.innerHTML = all_columns;
+                console.log(posts_ids);
+                all_view_buttons = document.getElementsByClassName("button_view")
+                for (var i = 0; i < all_view_buttons.length; i++) {
+                    var item = all_view_buttons[i];  
+                    /* I faced an issue while adding event listeners to buttons
+                     * in a for loop. I added the bind thanks to this explanation
+                     * on stackoverflow:
+                     * https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
+                     */
+                     item.addEventListener('click', print_to_console.bind(this, item.id), false);
+                }
+            }
+        
+        }else if(JSON.stringify(event.data).includes("DISCONNECTION OK")){
+            /*Session was successfully deleted on mysqlDB.*/
+            window.history.back()
+        
+        }else if(JSON.stringify(event.data).includes("POST_PRESENTATION")){
+            switch_style("ViewPostStyle")
+            var body_id = document.getElementById('main_body');
+            event_data_parsed = JSON.parse(event.data)
+            body_id.innerHTML = event_data_parsed.POST_PRESENTATION;
+            post_data = JSON.parse(JSON.stringify(event_data_parsed.POST_INFO).replace("[", "").replace("]", ""))
+            go_back_btn = document.getElementById("goback")
+            go_back_btn.addEventListener('click', function() {  
+                socket.send("MainFeed");
+                document.body.style.backgroundColor = "white"
+            });
+            //Info about internship to be filled.
+            /***********************************************************/
+            internship_name = document.getElementById("internship_name")
+            internship_name.innerHTML = post_data.name
+            company_name = document.getElementById("company_name")
+            company_name.innerHTML = post_data.company
+            start_date = document.getElementById("start_date")
+            start_date.innerHTML = post_data.start_date.replace("T00:00:00.000Z", "")
+            end_date = document.getElementById("end_date")
+            end_date.innerHTML = post_data.end_date.replace("T00:00:00.000Z", "")
+            description = document.getElementById("description")
+            description.innerHTML = post_data.description
+            /***********************************************************/
+            var title = document.getElementById("chat_title");
+            title.innerHTML = "Chat";
+            title.style.backgroundColor = "green";
+            log = document.getElementById("log");
+            chat = document.getElementById("chat");
+            chat.addEventListener("keyup", function(event) {
+                if(event.key === "Enter") {
+                    addMessage();
+                }
+            });
+
+        }else if(JSON.stringify(event.data).includes("POST_INFO")){
+            console.log("Info for this post:"+JSON.parse(event.data).POST_INFO)
+        
+        }else if(JSON.stringify(event.data).includes("chat_message")){
+            console.log("GOT chat message, verifying it...");
+            onMessage(event.data);
+        } 
+    };
+    /*****************************************************/
+
+    function opensidemenu() {
+        document.getElementById("sidemenu1").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        //Gives the shadow effect when the side menu is clicked.
+        document.body.style.backgroundColor = "rgba(0,0,0,0.6)";   
+    }
+
+    function closesidemenu() {
+        document.getElementById("sidemenu1").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "white";
+    }
+
+    /*
+     * Gets all the "link" tags and activates a certain style,
+     * using the provided style_title. This is iseful when the style
+     * of the page must be changed, for instance to create
+     * an internship. Thanks to this dinamic style loading and data
+     * sent and receive through the websockets, no page reload or
+     * requests of new pages is done.
+    */
+    function switch_style (style_title){
+        var i, tagLink ;
+        for (i = 0, tagLink = document.getElementsByTagName("link") ;
+            i < tagLink.length ; i++ ) {
+            if ((tagLink[i].rel.indexOf( "stylesheet") != -1) && tagLink[i].title) {
+                //Disables any other style which does not match title.
+                tagLink[i].disabled = true ;
+                if (tagLink[i].title == style_title) {
+                    //Enables style if title matches !
+                    tagLink[i].disabled = false ;
+                }
+            }
+        }
+    }
+
+    //WebSocket chat
+    /******************************************************/
+    function onMessage(message) {
+        chat_message_parsed = JSON.parse(message);
+        internship_name_ele = document.getElementById("internship_name").innerText
+        if(chat_message_parsed.internship_name == internship_name_ele){
+            console.log("Chat message:"+chat_message_parsed.chat_message)
+            console.log("Internship_name:"+chat_message_parsed.internship_name)
+            chat_message = chat_message_parsed.chat_message
+            user = chat_message_parsed.user
+            final_message = user + ":" + chat_message
+            log.innerHTML = '<li class = "message">' + 
+                final_message + "</li>" + log.innerHTML;
+        }
+    }
+					
+    function addMessage() {
+        var message = chat.value;
+        const session_value = localStorage.getItem("session_id");
+        console.log("session_value:"+session_value);
+        session_value_uuid = JSON.parse(session_value).session_id;
+        internship_name = document.getElementById("internship_name").innerText
+        console.log("About to send message to the server, message:"+message);
+        chat_message_info = {
+            "chat_message": message, 
+            "session_chat_id": session_value_uuid, 
+            "internship_name": internship_name 
+        }
+        chat.value = "";
+        socket.send(JSON.stringify(chat_message_info));
+    }
+    /******************************************************/
+</script>

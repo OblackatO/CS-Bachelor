@@ -1,0 +1,55 @@
+input {
+    color: black;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%; 
+    border: 2px solid DarkGreen;
+}
+
+text {
+    margin-left: 40%;
+    text-align:center;
+    line-height: 30px;
+    font-size: 1.5vw; /*vw adapt font size to window rescalling.*/
+    font-weight: bold;
+}
+
+fieldset {
+    /*color: darkgreen;*/
+    font-weight: bold;
+    margin-top: 15%;
+}
+
+button {
+    color: DarkGreen;
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid DarkGreen;
+    background-color: white;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 2%;
+    width: 20%;
+}
+
+select {
+    color: DarkGreen;
+    font-size: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid DarkGreen;
+    background-color: black;
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    color: white;
+    font-weight: bold ;
+}
+
+body {
+    /*Adapts to window rescalling.*/
+    background-image:    url(belval.png);
+    background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;/*center the image */
+}

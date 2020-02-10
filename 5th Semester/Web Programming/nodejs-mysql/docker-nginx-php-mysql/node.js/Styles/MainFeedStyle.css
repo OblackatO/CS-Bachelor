@@ -1,0 +1,72 @@
+/* 33% of the total width FOR each column: 
+ * 3 columns per row(if posts available)
+ */
+.column {
+  float: left;
+  width: 33%;
+  padding: 10px;
+  background-color: darkgrey;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.row:after {
+  content: "--";
+  display: table;
+  clear: both;
+}
+
+.sidemenu {
+  height: 96%; 
+  width: 0;
+  position: fixed; 
+  background-image: url(belval.png);
+  overflow-x: hidden; 
+  transition: 0.3s; 
+}
+
+.sidemenu side_ele {
+  padding: 8px 8px 8px 32px;
+  font-size: 1.2vw;
+  font-weight: bold;
+  color:black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidemenu side_ele:hover {
+  color: white;
+}
+
+.sidemenu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.sidebutton {
+  color:black;
+  font-size: 2vw;
+  font-weight: bold;
+  border-color: darkcyan;
+  background-color: darkcyan;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+.title {
+  color: darkcyan;
+  font-weight: bold;
+  background-color: black;
+}
+
+.button_view {
+  color: darkcyan;
+  background-color: black;
+  font-weight: bold;
+}

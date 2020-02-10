@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="Styles/RegisterStyles.css">
+</head>
+<body>
+    <fieldset>
+        <legend>Twinfo Registration:</legend>
+        <text>Username:</text><br>
+        <input name="username_value" type="text" id="username">
+        <text>Password:</text><br>
+        <input name="pwd_value" type="password" id="password">
+        <text>Confirm password:</text><br>
+        <input name="pwd_conf_value" type="password" id="password_conf_value" name="password">
+        <text>Account type:</text><br>
+        <select name="person_type" id="person_type">
+            <option value="Student">Student</option>
+            <option value="Lecturer">Lecturer</option>
+        </select>
+        <button id="register_submit">Register</button>
+    </fieldset>
+</body>
+
+<script>
+    var btn = document.getElementById('register_submit');
+    //Click event for register button.
+    btn.addEventListener('click', function() {
+        const username_value = document.getElementById('username').value;
+        const password_value = document.getElementById('password').value;
+        const password_conf_value = document.getElementById('password_conf_value').value
+        //console.log("username:"+username_value);
+        var message = "";
+        /*Simple validation of username && password*/
+        /*******************************************/
+        if(username_value.includes(" ")){
+            message = "\n[>]Username cannot have spaces!";
+        }
+        if(password_value !== password_conf_value){
+            message = message.concat("\n[>]Passwords do not match.")
+        }
+        var lowerCaseLetters = /[a-z]/g;
+        var upperCaseLetters = /[A-Z]/g;
+        var numbers = /[0-9]/g;
+        if(password_value.length < 8){
+            message = message.concat("\n[>]Password must have at least 8 characters");
+        }
+        if(password_value.match(lowerCaseLetters) === null){
+            message = message.concat("\n[>]Password must have lower case letters.");
+        }
+        if(password_value.match(upperCaseLetters) === null){
+            message = message.concat("\n[>]Password must have upper case letters.");
+        }
+        if(password_value.match(numbers) === null){
+            message = message.concat("\n[>]Password must have numbers.");
+        }
+        /*******************************************/
+        if(message != ""){
+            alert(message);
+        }else{
+            var requester = new XMLHttpRequest();
+            var url = "http://localhost:80/RegisterUser";
+            requester.open("POST", url);
+            requester.setRequestHeader("Content-Type", "application/json");
+            requester.onreadystatechange = function () {
+                console.log("response text:"+requester.responseText)
+                if (requester.status === 200 && requester.responseText == "OK") {
+                    console.log(requester.responseText);
+                    alert("Account created! You will be redirected to the login page.")
+                    document.location.href = '/';
+                }else if (requester.status === 200 && requester.responseText == "EXISTS"){
+                    alert("Username exists!");
+                }else if(requester.status === 400){
+                    alert("An error occured. Please, try again later.");
+                }
+            };
+            const person_value = document.getElementById('person_type').value;
+            var data = JSON.stringify({"username": username_value, 
+                                       "password": password_value,
+                                       "type": person_value
+                                    });
+            requester.send(data);
+        }
+    });
+</script>
+
+</html>
