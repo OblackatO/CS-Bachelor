@@ -58,7 +58,7 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
 ### Remarks : 
 
 [The PV204 course has a dedicated rep](https://github.com/OblackatO/PV204-Security-Technologies)  
-[Circuits Numériques has a dedicated rep](https://github.com/OblackatO/CircuitsNumeriquesTravail/settings)  
+[Circuits Numériques has a dedicated rep](https://github.com/OblackatO/CircuitsNumeriquesTravail/)  
 Some folders contain the *correction* of the requested exercises along with my *resolution* of them, others only contain my resolution. 
 
 This is **not** a realistic view of all the subjects I have been covering in my Bachelor's Course, there are only some of them which the contents make sense to be shared.
