@@ -1,0 +1,11 @@
+basics[x]:
+{'_id': 'tt0100275',
+ 'titleType': 'movie',
+ 'primaryTitle': 'The Wandering Soap Opera',
+ 'originalTitle': 'La Telenovela Errante',
+ 'isAdult': 0,
+ 'startYear': 2017,
+ 'endYear': None,
+ 'runtimeMinutes': 80,
+ 'genres': ['Comedy', 'Drama', 'Fantasy']}
+
