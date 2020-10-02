@@ -52,6 +52,8 @@ Some of the assignments of my Bachelor's Course, especially programming labs, ma
      |
      |_________ Cloud Computing
      |
+     |_________ Big Data
+     |
      |_________ Data Analysis with R
 ```
 
